@@ -7,14 +7,16 @@ import { MovieProvider } from "./contexts/MovieContext.jsx";
 
 function App() {
   return (
-    <MovieProvider className="app-shell">
-      <NavBar />
-      <main className="main-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/favourites" element={<Favourites />} />
-        </Routes>
-      </main>
+    <MovieProvider>
+      <div className="app-shell">
+        <NavBar />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/favourites" element={<Favourites />} />
+          </Routes>
+        </main>
+      </div>
     </MovieProvider>
   );
 }

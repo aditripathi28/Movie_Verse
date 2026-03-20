@@ -28,6 +28,8 @@ This app uses TMDB endpoints for:
 - Movie search
 - External IDs (to resolve IMDb URL)
 
+Set `VITE_TMDB_API_KEY` in a `.env` file to supply your own TMDB key.
+
 
 ## Learning Focus
 

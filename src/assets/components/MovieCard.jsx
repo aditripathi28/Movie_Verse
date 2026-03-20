@@ -1,5 +1,5 @@
 import "../../css/MovieCard.css";
-import { useMovieContext } from "../../contexts/MovieContext.jsx";
+import { useMovieContext } from "../../contexts/useMovieContext.jsx";
 import { useEffect, useState } from "react";
 import { getImdbUrlByTmdbId } from "../../services/api";
 
@@ -12,8 +12,17 @@ export function MovieCard({ movie }) {
     let active = true;
 
     const loadImdb = async () => {
-      const url = await getImdbUrlByTmdbId(movie.id);
-      if (active) setImdbUrl(url);
+      try {
+        const url = await getImdbUrlByTmdbId(movie.id);
+        if (active) {
+          setImdbUrl(url);
+        }
+      } catch (error) {
+        console.error("Failed to load IMDb link", error);
+        if (active) {
+          setImdbUrl(null);
+        }
+      }
     };
 
     loadImdb();
@@ -57,7 +66,11 @@ export function MovieCard({ movie }) {
     >
       <div className="movie-poster">
         <img
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          src={
+            movie.poster_path
+              ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+              : "https://placehold.co/500x750/1f1510/f7f1e8?text=No+Poster"
+          }
           alt={movie.title}
         />
 
